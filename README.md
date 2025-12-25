@@ -13,7 +13,7 @@ A client reported internet failure on a home workstation shortly after family us
 ## 1. DIAGNOSE CONNECTIVITY LAYERS
 The client received an `ERR_NAME_NOT_RESOLVED` error. I needed to distinguish between a physical network outage and a software configuration issue.
 
-![Err_name_not_resolved](Err_name_not_resolved.png)
+![Err_name_not_resolved](namenotresolved.png)
 
 The following screenshot demonstrates how I used `ping` to verify physical connectivity.
 
@@ -27,7 +27,7 @@ The screenshot confirms active hardware connectivity. I ran `ping 8.8.8.8` to te
 ## 2. IDENTIFY CONFIGURATION ERROR
 Suspecting a manual setting change, I inspected the Network Adapter properties to determine how the machine was resolving web addresses. The following screenshot reveals the incorrect DNS entry.
 
-![bad dns nslookup query](bad%20dns%20nslookup%20query.png)
+![bad dns nslookup query](baddnsquery.png)
 
 **Root Cause:**
 The screenshot exposes the root cause. The "Obtain DNS automatically" setting was disabled, and had been manually configured to a static DNS address of `10.0.0.0`. Since this is an invalid private address for public resolution, the computer was sending requests to a non-existent server.
@@ -37,9 +37,9 @@ The screenshot exposes the root cause. The "Obtain DNS automatically" setting wa
 ## 3. IMPLEMENT AND VERIFY RESOLUTION
 To restore access, I needed to correct the invalid entry and clear the system's error history. The following demonstrates how I configured reliable DNS servers and flushed the cache.
 
-![fixed dns](fixed%20dns.png)
-![networkadapter configuration](networkadapter%20configuration.png)
-![nslookup confirmation](nslookup%20confirmation.png)
+![fixed dns](fixeddns.png)
+![networkadapter configuration](networkadapterconfig.png)
+![nslookup confirmation](lookupconfirm.png)
 
 **Outcome:**
 The screenshots show the resolved configuration:
